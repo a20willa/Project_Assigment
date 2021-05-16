@@ -53,13 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Sätter listView
         listView = findViewById(R.id.list_view);
-
-        WebView myWebView = (WebView) findViewById(R.id.webView);
-        myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-
-
-        myWebView.loadUrl("https://www.google.com/maps/place/Torn+1,+541+92+Sk%C3%B6vde/@58.4097609,13.9315804,14.63z/data=!4m5!3m4!1s0x465b01141c0050c1:0x4add464d899c0c56!8m2!3d58.4100542!4d13.9342894");
     }
 
     //Options meny
@@ -146,11 +139,21 @@ public class MainActivity extends AppCompatActivity {
             //ListView sätter sig till det av adaptern
             listView.setAdapter(adapter);
 
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent2 = new Intent(MainActivity.this, map.class);
+                    startActivity(intent2);
+
+                    return true;
+                }
+            });
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Context context = getApplicationContext();
-                    CharSequence text = "Hint: " + newLocation[position].getName() + "\nLocation: " + newLocation[position].getLocation() + "\nRadius: " + newLocation[position].getSize() + "m";
+                    CharSequence text = "Hint: " + newLocation[position].getName() + "\nLocation: " + newLocation[position].getLocation() + "\nRadius: " + newLocation[position].getSize() + "m^2";
 
                     TextView tv1 = (TextView)findViewById(R.id.exp_info);
                     tv1.setTextColor(Color.parseColor("#000000"));
