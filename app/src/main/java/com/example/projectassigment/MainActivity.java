@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Sätter listView
         listView = findViewById(R.id.list_view);
+
+        //TODO: Add more content and map positions inside the web serivce to satisfy assigment goalls
     }
 
     //Options meny
@@ -143,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent2 = new Intent(MainActivity.this, map.class);
+                    intent2.putExtra(Intent.EXTRA_TEXT, newLocation[position].getAuxdata());
                     startActivity(intent2);
 
                     return true;

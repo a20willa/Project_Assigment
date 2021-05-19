@@ -7,6 +7,7 @@ public class Locations {
     private String location;
     private String name;
     private int cost;
+    private String auxdata;
 
 
     //Generate Constructor
@@ -16,6 +17,7 @@ public class Locations {
         this.location = location;
         this.name = name;
         this.cost = cost;
+        this.auxdata = auxdata;
     }
 
     //Generate Getter
@@ -40,6 +42,8 @@ public class Locations {
     public int getCost() {
         return cost;
     }
+
+    public String getAuxdata(){return auxdata;}
 
     //Generate toString()
     //Formatet här bestämmer hur den returnerade datan ser ut.
