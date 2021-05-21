@@ -1,17 +1,19 @@
 package com.example.projectassigment;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Locations {
     //Strings som används av JSON filen (variablerna har samma namn som taggarna)
-    private String id;
-    private int size;
-    private String location;
-    private String name;
-    private int cost;
-    private String auxdata;
+    private final String id;
+    private final int size;
+    private final String location;
+    private final String name;
+    private final int cost;
+    private final String auxdata;
 
 
     //Generate Constructor
-    public Locations(String name, String location, int size) {
+    public Locations(String id, int size, String location, String name, int cost, String auxdata) {
         this.id = id;
         this.size = size;
         this.location = location;
@@ -47,6 +49,7 @@ public class Locations {
 
     //Generate toString()
     //Formatet här bestämmer hur den returnerade datan ser ut.
+    @NotNull
     @Override
     public String toString() {
         return name;

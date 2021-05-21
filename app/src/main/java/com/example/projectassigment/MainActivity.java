@@ -1,7 +1,6 @@
 package com.example.projectassigment;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -68,15 +67,13 @@ public class MainActivity extends AppCompatActivity {
     //Öppnar hemsida vid tryck
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.item1:
-                Log.d("Text:","Success!");
-                Intent intent = new Intent(MainActivity.this, About.class);
-                startActivity(intent);
-                return  true;
-
-            default:return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.item1) {
+            Log.d("Text:", "Success!");
+            Intent intent = new Intent(MainActivity.this, About.class);
+            startActivity(intent);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     //Parser
@@ -130,9 +127,8 @@ public class MainActivity extends AppCompatActivity {
             final Locations[] newLocation = gson.fromJson(json, Locations[].class);
 
             //Lägger till data i ArrayLissten
-            for(int i = 0; i < newLocation.length; i++)
-            {
-                list.add(newLocation[i]);
+            for (Locations value : newLocation) {
+                list.add(value);
             }
 
             //Adaptern använder sig av ArrayList (list)
