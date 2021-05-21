@@ -1,11 +1,11 @@
 package com.example.projectassigment;
 
+//Savve Class
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -15,14 +15,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -33,6 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -127,9 +125,7 @@ public class MainActivity extends AppCompatActivity {
             final Locations[] newLocation = gson.fromJson(json, Locations[].class);
 
             //Lägger till data i ArrayLissten
-            for (Locations value : newLocation) {
-                list.add(value);
-            }
+            list.addAll(Arrays.asList(newLocation));
 
             //Adaptern använder sig av ArrayList (list)
             adapter = new ArrayAdapter<Locations>(MainActivity.this, R.layout.listview_item, R.id.item, list);
