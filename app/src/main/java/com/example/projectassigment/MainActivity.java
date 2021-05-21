@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     //Globabala variabler
     private Locations[] locations;
     private final ArrayList<Locations> list = new ArrayList<Locations>();
-    private ArrayAdapter<Locations> adapter;
     private ListView listView;
 
     @Override
@@ -128,32 +127,26 @@ public class MainActivity extends AppCompatActivity {
             list.addAll(Arrays.asList(newLocation));
 
             //Adaptern använder sig av ArrayList (list)
-            adapter = new ArrayAdapter<Locations>(MainActivity.this, R.layout.listview_item, R.id.item, list);
+            ArrayAdapter<Locations> adapter = new ArrayAdapter<Locations>(MainActivity.this, R.layout.listview_item, R.id.item, list);
             adapter.notifyDataSetChanged();
             //ListView sätter sig till det av adaptern
             listView.setAdapter(adapter);
 
-            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent2 = new Intent(MainActivity.this, map.class);
-                    intent2.putExtra(Intent.EXTRA_TEXT, newLocation[position].getAuxdata());
-                    startActivity(intent2);
+            listView.setOnItemLongClickListener((parent, view, position, id) -> {
+                Intent intent2 = new Intent(MainActivity.this, map.class);
+                intent2.putExtra(Intent.EXTRA_TEXT, newLocation[position].getAuxdata());
+                startActivity(intent2);
 
-                    return true;
-                }
+                return true;
             });
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Context context = getApplicationContext();
-                    CharSequence text = "Hint: " + newLocation[position].getName() + "\nLocation: " + newLocation[position].getLocation() + "\nRadius: " + newLocation[position].getSize() + "m^2";
+            listView.setOnItemClickListener((AdapterView.OnItemClickListener) (parent, view, position, id) -> {
+                Context context = getApplicationContext();
+                CharSequence text = "Hint: " + newLocation[position].getName() + "\nLocation: " + newLocation[position].getLocation() + "\nRadius: " + newLocation[position].getSize() + "m^2";
 
-                    TextView tv1 = (TextView)findViewById(R.id.exp_info);
-                    tv1.setTextColor(Color.parseColor("#000000"));
-                    tv1.setText(text);
-                }
+                TextView tv1 = (TextView)findViewById(R.id.exp_info);
+                tv1.setTextColor(Color.parseColor("#000000"));
+                tv1.setText(text);
             });
         }
     }
